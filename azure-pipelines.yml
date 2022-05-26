@@ -21,10 +21,15 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
+- task: CmdLine@2
+  inputs:
+    script: |
+      pwd
+      ls -l
   
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '.'
     ArtifactName: 'drop'
   
 
