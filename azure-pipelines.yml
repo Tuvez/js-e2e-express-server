@@ -31,4 +31,5 @@ steps:
   inputs:
     PathtoPublish: '.'
     ArtifactName: 'drop'
+    publishLocation: Container
   
