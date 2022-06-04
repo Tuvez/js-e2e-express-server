@@ -34,8 +34,6 @@ steps:
     testType: 'app'
     monitorWhen: 'always'
     failOnIssues: true
-    projectName: 'DEMO CI/CD'
-    organization: 'valeriotuveri'
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '.'
