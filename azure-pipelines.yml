@@ -32,7 +32,7 @@ steps:
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    rootFolderOrFile: '.'
     includeRootFolder: true
     archiveType: 'zip'
     archiveFile: 'demo.zip'
@@ -41,6 +41,6 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: 'demo.zip'
-    ArtifactName: 'Build.SourceBranchName'
+    ArtifactName: '$(Build.BuildId)'
     publishLocation: Container
   
