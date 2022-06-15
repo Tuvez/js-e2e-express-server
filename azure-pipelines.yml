@@ -35,12 +35,12 @@ steps:
     rootFolderOrFile: '.'
     includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: 'demo.zip'
+    archiveFile: '$(Build.SourceBranchName).zip'
     replaceExistingArchive: true
     
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'demo.zip'
-    ArtifactName: '$(Build.BuildId)'
+    PathtoPublish: '$(Build.SourceBranchName).zip'
+    ArtifactName: '$(Build.SourceBranchName)'
     publishLocation: Container
   
