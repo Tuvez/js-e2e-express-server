@@ -27,16 +27,11 @@ steps:
     script: |
       pwd
       ls -l
+      echo '$(Build.BinariesDirectory)'
 
-- task: SnykSecurityScan@1
-  inputs:
-    serviceConnectionEndpoint: 'SNIK'
-    testType: 'app'
-    monitorWhen: 'always'
-    failOnIssues: true
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '.'
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
     includeRootFolder: true
     archiveType: 'zip'
     archiveFile: 'demo.zip'
@@ -45,6 +40,6 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: 'demo.zip'
-    ArtifactName: 'drop'
+    ArtifactName: 'Build.SourceBranchName'
     publishLocation: Container
   
