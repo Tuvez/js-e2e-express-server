@@ -12,40 +12,26 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: NodeTool@0
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
   inputs:
-    versionSpec: '10.x'
-    
-  displayName: 'Install Node.js'
-
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
-
-- task: CmdLine@2
-  inputs:
-    script: |
-      pwd
-      ls -l
-
-- task: SnykSecurityScan@1
-  inputs:
-    serviceConnectionEndpoint: 'SNIK'
-    testType: 'app'
-    monitorWhen: 'always'
-    failOnIssues: true
+    SourceFolder: '$(build.sourcesDirectory)'
+    Contents: |
+     **/*
+     !.git/**
+     !azure-pipelines.yml
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '.'
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
     includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: 'demo.zip'
+    archiveFile: '$(Build.Repository.Name).zip'
     replaceExistingArchive: true
     
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'demo.zip'
-    ArtifactName: 'drop'
+    PathtoPublish: '$(Build.Repository.Name).zip'
+    ArtifactName: '$(Build.Repository.Name)'
     publishLocation: Container
   
