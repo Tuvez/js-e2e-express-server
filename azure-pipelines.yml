@@ -11,7 +11,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-name: $(BuildDefinitionName).$(rev:r)
+name: $(System.PullRequest.SourceBranch).$(rev:r)
 
 steps:
 - task: NodeTool@0
