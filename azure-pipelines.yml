@@ -46,7 +46,7 @@ steps:
     vgname: 'Release_Config'
     orgname: 'valeriotuveri95'
     op: 'Update'
-    varops: '= Relaese_number => "2.1"'
+    varops: '= Release_number => "2.1"'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.SourceBranchName).zip'
