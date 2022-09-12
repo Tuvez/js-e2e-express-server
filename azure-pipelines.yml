@@ -1,5 +1,6 @@
 # Node.js
 
+
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
@@ -38,7 +39,14 @@ steps:
     archiveType: 'zip'
     archiveFile: '$(Build.SourceBranchName).zip'
     replaceExistingArchive: true
-    
+- task: ManageVariableGroupTask@0
+  inputs:
+    pat: '$(TOKEN)'
+    project: 'a880fe28-647f-4148-85ce-71fd40761f04'
+    vgname: 'Release_Config'
+    orgname: 'valeriotuveri95'
+    op: 'Update'
+    varops: '= Relaese_number => "2.1"'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.SourceBranchName).zip'
